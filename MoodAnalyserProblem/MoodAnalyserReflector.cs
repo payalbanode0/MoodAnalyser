@@ -7,10 +7,8 @@ using static MoodAnalyserProblems.CustomException;
 
 namespace MoodAnalyserProblems
 {
-
     public class MoodAnalyserReflector
     {
-
         //CreateMoodAnalyser method to creat object of MoodAnalyser class with Default Constructor.
         public static object CreateMoodAnalyser(string className, string constructorName)
         {
@@ -72,6 +70,31 @@ namespace MoodAnalyserProblems
             catch
             {
                 throw new CustomException(CustomException.ExceptionType.NO_SUCH_METHOD, "Method is not found");
+            }
+        }
+
+        // Use SetField Method to change mood dynamically.
+        public static string SetField(string value, string fieldName)
+        {
+            try
+            {
+                MoodAnalyser obj = (MoodAnalyser)CreateMoodAnalyserUsingParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser", value);
+                Type type = typeof(MoodAnalyser);
+                FieldInfo fieldInfo = type.GetField(fieldName);
+                if (fieldInfo != null)
+                {
+                    if (value == null)
+                    {
+                        throw new CustomException(ExceptionType.EMPTY_MESSAGE, "Message should not be null");
+                    }
+                    fieldInfo.SetValue(obj, value);
+                    return obj.message;
+                }
+                throw new CustomException(ExceptionType.NO_SUCH_FIELD, "Field not found");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

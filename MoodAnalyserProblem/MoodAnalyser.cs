@@ -8,6 +8,8 @@ namespace MoodAnalyserProblems
     public class MoodAnalyser
     {
         string moodMessage;
+        internal readonly string message;
+
         public MoodAnalyser(string moodMessage)
         {
             this.moodMessage = moodMessage;
@@ -42,6 +44,7 @@ namespace MoodAnalyserProblems
             {
                 return ex.Message;
             }
+
         }
     }
 }

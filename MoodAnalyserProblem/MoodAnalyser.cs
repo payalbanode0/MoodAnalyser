@@ -37,7 +37,6 @@ namespace MoodAnalyserProblems
                 {
                     return "HAPPY";
                 }
-
             }
             catch (Exception ex)
             {

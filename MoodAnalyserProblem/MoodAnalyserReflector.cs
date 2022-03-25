@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using static MoodAnalyserProblems.CustomException;
 
 namespace MoodAnalyserProblems
 {
-    public class MoodAnalyserFactory
+
+    public class MoodAnalyserReflector
     {
 
         //CreateMoodAnalyser method to creat object of MoodAnalyser class with Default Constructor.
@@ -53,6 +55,23 @@ namespace MoodAnalyserProblems
             else
             {
                 throw new CustomException(CustomException.ExceptionType.NO_SUCH_CLASS, "Class is Not Found");
+            }
+        }
+
+        // Use Reflector to invoke MoodAnalyzer method 
+        public static string InvokeAnalyseMood(string message, string methodName)
+        {
+            try
+            {
+                Type type = Type.GetType("Mood_Analyser_Problems.MoodAnalyser");
+                object moodAnalyseObject = MoodAnalyserReflector.CreateMoodAnalyserUsingParameterizedConstructor("Mood_Analyser_Problems.MoodAnalyser", "MoodAnalyser", message);
+                MethodInfo methodeInfo = type.GetMethod(methodName);
+                object mood = methodeInfo.Invoke(moodAnalyseObject, null);
+                return mood.ToString();
+            }
+            catch
+            {
+                throw new CustomException(CustomException.ExceptionType.NO_SUCH_METHOD, "Method is not found");
             }
         }
     }

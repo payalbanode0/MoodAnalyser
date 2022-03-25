@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static MoodAnalyserProblem.MoodAnalyserCustomException;
+using static MoodAnalyserProblems.CustomException;
 
-namespace MoodAnalyserProblem
+namespace MoodAnalyserProblems
 {
     public class MoodAnalyser
     {
@@ -13,11 +13,11 @@ namespace MoodAnalyserProblem
             {
                 if (moodMessage == null)
                 {
-                    throw new MoodAnalyserCustomException(ExceptionType.NULL_MESSAGE_EXCEPTION, "Null message passed.");
+                    throw new CustomException(ExceptionType.NULL_MESSAGE_EXCEPTION, "Null message passed.");
                 }
                 if (moodMessage.Equals(string.Empty))
                 {
-                    throw new MoodAnalyserCustomException(ExceptionType.EMPTY_MESSAGE_EXCEPTION, "Empty message passed.");
+                    throw new CustomException(ExceptionType.EMPTY_MESSAGE_EXCEPTION, "Empty message passed.");
                 }
                 if (moodMessage.ToLower().Contains("sad"))
                 {

@@ -1,29 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using static MoodAnalyserProblem.MoodAnalyserCustomException;
 
-namespace MoodAnalyserProb
+namespace MoodAnalyserProblem
 {
     public class MoodAnalyser
     {
-        string message;
-        public MoodAnalyser(string message)
+        public string AnalyseMood(string moodMessage)
         {
-            this.message = message;
-        }
+            try
+            {
+                if (moodMessage == null)
+                {
+                    throw new MoodAnalyserCustomException(ExceptionType.NULL_MESSAGE_EXCEPTION, "Null message passed.");
+                }
+                if (moodMessage.Equals(string.Empty))
+                {
+                    throw new MoodAnalyserCustomException(ExceptionType.EMPTY_MESSAGE_EXCEPTION, "Empty message passed.");
+                }
+                if (moodMessage.ToLower().Contains("sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
 
-        public string AnalyzeMood()
-        {
-            if (message.ToLower().Contains("happy"))
-            {
-                return "happy";
             }
-            else
+            catch (Exception ex)
             {
-                return "sad";
+                return ex.Message;
             }
+
         }
     }
 }

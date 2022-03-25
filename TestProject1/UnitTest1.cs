@@ -1,34 +1,68 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MoodAnalyserProb;
+using MoodAnalyserProblem;
 
 namespace TestProject1
 {
     [TestClass]
     public class UnitTest1
     {
-        MoodAnalyser moodAnalyser;
-        string message = " I am in happy Mood";
-        [TestInitialize]
-        public void SetUp()
-        {
-            moodAnalyser = new MoodAnalyser(message);
-        }
         [TestMethod]
-        public void TestMethodForHappyMood()
-
+        public void GivenMood_WhenSad_ShouldReturn_SAD_MOOD()
         {
-            string expected = "happy";
+            //Arrange
+            string moodMessage = "I am in Sad Mood";
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string expected = "SAD";
 
-            string actual = moodAnalyser.AnalyzeMood();
+            //Act
+            string actual = moodAnalyser.AnalyseMood(moodMessage);
+
+            //Assert
             Assert.AreEqual(expected, actual);
         }
-        [TestMethod]
-        public void TestMethodForSadMood()
 
+        [TestMethod]
+        public void GivenMood_WhenHappy_ShouldReturn_HAPPY_MOOD()
         {
-            string expected = "sad";
-            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad Mood");
-            string actual = moodAnalyser.AnalyzeMood();
+            //Arrange
+            string moodMessage = "I am in Any Mood";
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string expected = "HAPPY";
+
+            //Act
+            string actual = moodAnalyser.AnalyseMood(moodMessage);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenMood_WhenNull_ShouldReturn_Null_MOOD_EXCEPTION_MESSAGE()
+        {
+            //Arrange
+            string moodMessage = null;
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string expected = "Null message passed.";
+
+            //Act
+            string actual = moodAnalyser.AnalyseMood(moodMessage);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenMood_WhenEmpty_ShouldReturn_EMPTY_MOOD_EXCEPTION_MESSAGE()
+        {
+            //Arrange
+            string moodMessage = string.Empty;
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string expected = "Empty message passed.";
+
+            //Act
+            string actual = moodAnalyser.AnalyseMood(moodMessage);
+
+            //Assert
             Assert.AreEqual(expected, actual);
         }
     }
